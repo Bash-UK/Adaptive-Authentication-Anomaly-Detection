@@ -1,0 +1,31 @@
+{
+  "dataset": "data/synthetic_web_auth_logs_v2.csv",
+  "sequence_length": 12,
+  "split_sizes": {
+    "fit_sequences": 36706,
+    "val_sequences": 9172,
+    "test_sequences": 11532,
+    "test_anomaly_rate": 0.10631286853971557
+  },
+  "results": {
+    "lof_baseline": {
+      "roc_auc": 0.8290681571323694,
+      "pr_auc": 0.4434321759733442,
+      "f1": 0.45273972602739726,
+      "threshold": 0.6900000000000002
+    },
+    "lstm_autoencoder": {
+      "roc_auc": 0.6133736694663683,
+      "pr_auc": 0.14626146831220227,
+      "f1": 0.22244030094864245,
+      "threshold": 0.33
+    },
+    "lstm_autoencoder_plus_lof_latent": {
+      "roc_auc": 0.6122499793433496,
+      "pr_auc": 0.14692117883332556,
+      "f1": 0.22384524279510462,
+      "threshold": 0.38000000000000006,
+      "alpha_ae": 0.8000000000000002
+    }
+  }
+}

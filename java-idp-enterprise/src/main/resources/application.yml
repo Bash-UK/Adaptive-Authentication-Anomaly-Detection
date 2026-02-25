@@ -1,0 +1,15 @@
+anomaly:
+  ml:
+    detect-url: http://ml-risk-engine:9092/detect
+  threshold:
+    high: 0.75
+    moderate: 0.45
+    newDeviceBoost: 0.12
+    countryChangeBoost: 0.10
+    geoDistanceBoost: 0.08
+    highIpBoost: 0.12
+    mediumIpBoost: 0.06
+    failedAttemptsHighBoost: 0.15
+    failedAttemptsMediumBoost: 0.08
+    oddHourBoost: 0.04
+    lowConfidenceFloor: 0.65

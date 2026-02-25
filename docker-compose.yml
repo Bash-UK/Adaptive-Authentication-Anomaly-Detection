@@ -1,0 +1,30 @@
+services:
+
+  ml-risk-engine:
+    build: ./ml-risk-engine
+    container_name: ml-risk-engine
+    ports:
+      - "9092:9092"
+    environment:
+      - ANOMALY_PG_ENABLED=true
+      - ANOMALY_DB_DSN=postgresql://postgres:sodtgarfield@host.docker.internal:5432/anomaly_engine_rt
+      - ANOMALY_DB_SCHEMA=anomaly_engine
+      - ANOMALY_PG_VECTOR_KEEP=12000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  idp-backend:
+    build: ./java-idp-enterprise
+    container_name: anomaly-idp
+    ports:
+      - "9091:8080"
+    depends_on:
+      - ml-risk-engine
+
+  demo-frontend:
+    build: ./demo-frontend
+    container_name: anomaly-demo-frontend
+    ports:
+      - "8088:80"
+    depends_on:
+      - idp-backend

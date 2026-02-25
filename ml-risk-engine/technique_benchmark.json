@@ -1,0 +1,30 @@
+{
+  "dataset": "data/synthetic_web_auth_logs.csv",
+  "results": {
+    "IsolationForest": {
+      "roc_auc": 0.4332894110202935,
+      "pr_auc": 0.15768562457779617,
+      "f1_best": 0.2773497688751926,
+      "best_threshold": 0.14999999999999997
+    },
+    "LocalOutlierFactor": {
+      "roc_auc": 0.7775090831679936,
+      "pr_auc": 0.5280676364977723,
+      "f1_best": 0.6151761517615176,
+      "best_threshold": 0.8899999999999996
+    },
+    "CategoricalMixture": {
+      "roc_auc": 0.7240812074765537,
+      "pr_auc": 0.4793189556448667,
+      "f1_best": 0.5351724137931034,
+      "best_threshold": 0.8999999999999996
+    },
+    "LSTMAutoEncoder": {
+      "roc_auc": 0.5538461538461539,
+      "pr_auc": 0.5116883116883117,
+      "f1_best": 0.5,
+      "best_threshold": 0.34999999999999987
+    }
+  },
+  "winner_by_pr_auc": "LocalOutlierFactor"
+}
