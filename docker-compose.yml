@@ -6,6 +6,7 @@ services:
     ports:
       - "9092:9092"
     environment:
+      - APP_VERSION=2.0.0
       - ANOMALY_PG_ENABLED=true
       - ANOMALY_DB_DSN=postgresql://postgres:sodtgarfield@host.docker.internal:5432/anomaly_engine_rt
       - ANOMALY_DB_SCHEMA=anomaly_engine

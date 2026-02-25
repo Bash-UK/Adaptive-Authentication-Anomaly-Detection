@@ -44,12 +44,14 @@ docker compose up --build -d
 - `POST /enterprise/login` -> final adaptive auth decision.
 - `GET /enterprise/user/{userId}/history?limit=70` -> timeline points for graph.
 - `GET /enterprise/users?limit=300` -> tracked users for graph selector.
+- `GET /enterprise/version` -> backend version metadata.
 
 ### ML Engine (`9092`)
 - `POST /detect` -> unsupervised risk + confidence + model components.
 - `GET /history/{user_id}?limit=70` -> persisted ML risk timeline.
 - `GET /users?limit=300` -> known user IDs from state/history.
 - `GET /health` -> model readiness + persistence mode.
+- `GET /version` -> ML service version metadata.
 
 ## Example API Call
 ```bash
@@ -98,3 +100,10 @@ Note:
 ## Docker Build Optimization
 - Python dependencies are installed from `ml-risk-engine/requirements.txt` in a stable layer.
 - Rebuilds reuse dependency cache unless `requirements.txt` changes.
+
+## Versioning
+- Project version file: `VERSION`
+- Changelog: `CHANGELOG.md`
+- Current service defaults:
+  - Backend version from `java-idp-enterprise/src/main/resources/application.yml` (`app.version`)
+  - ML version from `APP_VERSION` in `docker-compose.yml`

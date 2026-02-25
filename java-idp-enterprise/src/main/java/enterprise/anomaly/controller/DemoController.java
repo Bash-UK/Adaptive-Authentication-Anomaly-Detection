@@ -1,6 +1,7 @@
 package enterprise.anomaly.controller;
 
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,10 +34,14 @@ public class DemoController {
     private final AnomalyThresholdConfig thresholdConfig;
     private final MlRiskClient mlRiskClient;
     private final Map<String, String> mfaWarmupFingerprints = new ConcurrentHashMap<>();
+    private final String appVersion;
 
-    public DemoController(AnomalyThresholdConfig thresholdConfig, MlRiskClient mlRiskClient) {
+    public DemoController(AnomalyThresholdConfig thresholdConfig,
+                          MlRiskClient mlRiskClient,
+                          @Value("${app.version:2.0.0}") String appVersion) {
         this.thresholdConfig = thresholdConfig;
         this.mlRiskClient = mlRiskClient;
+        this.appVersion = appVersion;
     }
 
     @PostMapping("/login")
@@ -165,6 +170,14 @@ public class DemoController {
         List<String> users = mlRiskClient.getTrackedUsers(safeLimit);
         Map<String, Object> out = new HashMap<>();
         out.put("users", users);
+        return out;
+    }
+
+    @GetMapping("/version")
+    public Map<String, Object> version() {
+        Map<String, Object> out = new HashMap<>();
+        out.put("service", "idp-backend");
+        out.put("version", appVersion);
         return out;
     }
 
