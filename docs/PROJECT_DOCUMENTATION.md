@@ -258,10 +258,18 @@ Main runtime configuration:
   - policy thresholds and boosts
 
 ML env variables:
+- `APP_VERSION`
 - `ANOMALY_PG_ENABLED`
 - `ANOMALY_DB_DSN`
 - `ANOMALY_DB_SCHEMA`
 - `ANOMALY_PG_VECTOR_KEEP`
+
+## 14.1 Versioning
+- Root project version is tracked in `VERSION`.
+- Change history is tracked in `CHANGELOG.md`.
+- Runtime version endpoints:
+  - Java: `GET /enterprise/version`
+  - ML: `GET /version`
 
 ## 15. Operational Notes
 - ML engine gracefully falls back to memory mode if DB init/restore fails.

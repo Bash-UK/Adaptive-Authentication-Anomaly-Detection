@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 from threading import Lock
 from typing import List, Optional
@@ -12,6 +13,7 @@ app = FastAPI()
 store = build_store_from_env()
 engine = RealtimeAnomalyEngine(store=store)
 engine_lock = Lock()
+APP_VERSION = os.getenv("APP_VERSION", "2.0.0")
 
 
 class DetectRequest(BaseModel):
@@ -118,3 +120,12 @@ def users(limit: int = 200):
     with engine_lock:
         items = engine.tracked_users(limit=safe_limit)
     return {"users": items}
+
+
+@app.get("/version")
+def version():
+    return {
+        "service": "ml-risk-engine",
+        "version": APP_VERSION,
+        "mode": "unsupervised_realtime_behavioral",
+    }

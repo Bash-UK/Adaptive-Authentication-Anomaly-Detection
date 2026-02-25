@@ -27,7 +27,7 @@ class DemoControllerTest {
             Mockito.any(),
             Mockito.any()
         )).thenReturn(null);
-        DemoController controller = new DemoController(thresholds(), mlRiskClient);
+        DemoController controller = new DemoController(thresholds(), mlRiskClient, "2.0.0");
 
         AdaptiveAuthResponse response = controller.simulate(validRequest());
 
@@ -52,7 +52,7 @@ class DemoControllerTest {
             Mockito.any(),
             Mockito.any()
         )).thenReturn(risk);
-        DemoController controller = new DemoController(thresholds(), mlRiskClient);
+        DemoController controller = new DemoController(thresholds(), mlRiskClient, "2.0.0");
 
         LoginRiskRequest request = validRequest();
         request.setNewDeviceFlag(1);
@@ -85,7 +85,7 @@ class DemoControllerTest {
             Mockito.any(),
             Mockito.any()
         )).thenReturn(risk);
-        DemoController controller = new DemoController(thresholds(), mlRiskClient);
+        DemoController controller = new DemoController(thresholds(), mlRiskClient, "2.0.0");
 
         AdaptiveAuthResponse response = controller.simulate(validRequest());
 

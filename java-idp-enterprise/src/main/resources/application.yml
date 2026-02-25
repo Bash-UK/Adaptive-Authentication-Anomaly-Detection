@@ -1,3 +1,6 @@
+app:
+  version: 2.0.0
+
 anomaly:
   ml:
     detect-url: http://ml-risk-engine:9092/detect
