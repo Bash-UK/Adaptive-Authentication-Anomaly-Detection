@@ -44,14 +44,14 @@ The system is split into three services:
 Frontend captures user-friendly fields:
 - `userId`
 - `deviceId`
-- previous and current country (2-letter)
 - login status
 - login hour
 - device changed
 - failed attempts
 - IP address
+- previous/current map location points (interactive)
 
-It derives compatibility features (e.g., normalized fields) and computes country change automatically from previous/current country.
+It derives compatibility features (e.g., normalized fields) and computes country change automatically from reverse-geocoded previous/current locations.
 
 ### 5.2 Backend Decision Orchestration
 Java endpoint:
@@ -150,17 +150,18 @@ Stored data:
 - `POST /enterprise/login`
   - request: login context + compatibility features
   - response: action, finalRisk, modelRisk, confidence, reasons
-- `GET /enterprise/user/{userId}/history?limit=60`
+- `GET /enterprise/user/{userId}/history?limit=70`
   - response: timeline points
-- `GET /enterprise/users?limit=200`
+- `GET /enterprise/users?limit=300`
   - response: tracked users
 
 ## 9.2 ML (`9092`)
 - `POST /detect`
   - response: risk, confidence, components, state, model metadata
-- `GET /history/{user_id}?limit=60`
-- `GET /users?limit=200`
+- `GET /history/{user_id}?limit=70`
+- `GET /users?limit=300`
 - `GET /health`
+- `GET /version`
 
 ## 10. Setup and Run
 ## 10.1 Prerequisites
@@ -191,16 +192,14 @@ curl http://localhost:9091/enterprise/users?limit=20
 
 ## 11. Frontend UX Summary
 Current frontend provides:
-- simulation form for event generation
-- decision panel showing action/risk/reasons
-- graph panel with:
-  - user selector
-  - risk line
-  - confidence line
-  - moving average
-  - threshold line
-  - anomaly markers
-  - metric cards and hover details
+- sectioned navigation with pages:
+  - `Dashboard`: overview cards + quick-start steps
+  - `Simulation`: event generation + decision panel
+  - `User Graphs`: searchable user selector + trend visualization
+  - `Risk Events`: recent event list
+- map-based location selection in Simulation for previous/current location
+- graph panel with risk/confidence/moving-average/threshold/anomaly markers
+- inline chart tooltip and hover details for selected event points
 
 ## 12. Benchmarking and Metrics
 This repo includes offline benchmark artifacts used during exploration.

@@ -18,6 +18,13 @@ This repository contains:
   - `BLOCK`
 - Persists state and risk timeline in PostgreSQL for continuity and graph visualization.
 
+## v2.0.0 Highlights
+- Multi-page frontend navigation: `Dashboard`, `Simulation`, `User Graphs`, `Risk Events`.
+- Dashboard overview cards with quick-start guidance.
+- Map-based location simulation with previous/current point selection.
+- Country change derived automatically from reverse-geocoded previous/current locations.
+- Searchable graph user selection with Enter-to-load and improved point hover tooltip.
+
 ## Quick Start
 ### Prerequisites
 - Docker + Docker Compose
@@ -104,6 +111,7 @@ Note:
 ## Versioning
 - Project version file: `VERSION`
 - Changelog: `CHANGELOG.md`
+- Current release: `2.0.0`
 - Current service defaults:
   - Backend version from `java-idp-enterprise/src/main/resources/application.yml` (`app.version`)
   - ML version from `APP_VERSION` in `docker-compose.yml`
