@@ -1,5 +1,8 @@
 # Enterprise Adaptive Anomaly Engine
 
+## Abstract
+This project is an end-to-end adaptive authentication platform that detects anomalous user login behavior in real time using unsupervised machine learning. It combines a React simulation UI, a Spring Boot policy backend, and a FastAPI ML risk engine to evaluate behavioral risk signals (device, location, login timing, failures, IP), produce risk/confidence scores, and enforce IAM-style outcomes (`ALLOW`, `MFA_CHALLENGE`, `BLOCK`). It also persists event/state history in PostgreSQL for continuous learning and user risk trend visualization.
+
 Unsupervised, real-time user behavior anomaly detection system for adaptive authentication.
 
 This repository contains:
