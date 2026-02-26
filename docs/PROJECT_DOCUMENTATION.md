@@ -110,6 +110,29 @@ Confidence blends:
 - user history maturity
 - agreement between user/global components
 
+### 6.3 How the Active Algorithms Work
+This project uses a hybrid unsupervised approach with two complementary signals:
+
+1. Per-user adaptive baseline deviation
+- The engine continuously learns each user's own behavioral baseline from recent events.
+- For every new event, it measures how far the event deviates from that user's normal profile (for example: unusual login hour, new/rare device-country pattern, abrupt geo jump, fail streak shifts).
+- Deviation is calculated with robust statistics and novelty flags so the model can adapt over time while still highlighting behavior that is atypical for that specific user.
+- Intuition: "Is this user acting unlike themselves?"
+
+2. Global rolling Isolation Forest outlier score
+- In parallel, the system maintains a rolling global feature buffer across users and periodically refits an Isolation Forest.
+- Isolation Forest isolates data points through random partitions; points that are isolated in fewer splits are considered more anomalous.
+- This yields a population-level outlier signal indicating whether the event is unusual relative to broader traffic.
+- Intuition: "Is this event an outlier compared to everyone?"
+
+3. Hybrid risk construction
+- Final runtime model risk combines both signals:
+  - strong user-personalized deviation sensitivity
+  - global outlier awareness for broader attack patterns
+- In this project, risk is blended as:
+  - `risk = 0.65 * user_risk + 0.35 * global_risk`
+- This reduces false negatives from purely global models and false positives from purely per-user drift, improving adaptive-auth decision quality.
+
 ## 7. Policy Layer (Java)
 After ML risk is returned, Java policy adds context boosts:
 - new device
